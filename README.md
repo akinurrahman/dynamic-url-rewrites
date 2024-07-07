@@ -35,11 +35,11 @@ The folder structure inside the user directory should look like this:
 ```
 user/
 ├── profile
-│   └── index.js
+│   └── page.tsx
 ├── about
-│   └── index.js
+│   └── page.tsx
 └── contact
-    └── index.js
+    └── page.tsx
 ```
     
     
