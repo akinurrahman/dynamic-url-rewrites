@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js Dynamic Rewrites
 
-## Getting Started
+This project demonstrates how to create dynamic rewrite rules in a Next.js application, allowing for flexible URL mapping to directories within the `user` folder.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Dynamic URL rewrites
+- Simplified routing without the need for prefixing paths with the `user` directory
+
+## Configuration
+
+The following configuration in `next.config.js` sets up the dynamic rewrites:
+
+```
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/:path*',
+        destination: '/user/:path*',
+      },
+    ];
+  },
+};
+
+export default nextConfig;
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Folder Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The folder structure inside the user directory should look like this:
 
-## Learn More
+```
+user/
+├── profile
+│   └── index.js
+├── about
+│   └── index.js
+└── contact
+    └── index.js
+```
+    
+    
+ ## Accessing Pages
 
-To learn more about Next.js, take a look at the following resources:
+With the dynamic rewrites configured, you can access the pages as follows:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    /profile will map to user/profile/page.tsx
+    /about will map to user/about/page.tsx
+    /contact will map to user/contact/page.tsx
